@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESL Lesson: The Community Garden Project (Lesson 2)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .tab-btn.active {
+      border-color: #38a169; /* Green-600 */
+      background-color: #f7fee7; /* Lime-50 */
+      color: #38a183; /* Green-600 */
+    }
+    .flashcard-inner {
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front,
+    .flashcard-back {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .flashcard-back {
+      transform: rotateY(180deg);
+    }
+    .feedback {
+      display: none;
+      font-weight: bold;
+    }
+    .feedback.correct {
+      display: inline;
+      color: #16a34a;
+    }
+    .feedback.incorrect {
+      display: inline;
+      color: #dc2626;
+    }
+    .tooltip {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .has-tooltip:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    .pronunciation-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+      background-color: #f7fee7; /* Lime-50 */
+      border: 1px solid #d9f99d; /* Lime-200 */
+    }
+  </style>
+</head>
+<body class="bg-lime-50 text-slate-800">
+
+  <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-green-700">ESL Lesson: The Community Garden Project (Lesson 2)</h1>
+      <p class="text-slate-600 mt-2">An interactive lesson for B1-level learners.</p>
+    </header>
+
+    <main>
+      <!-- Tabs -->
+      <div class="mb-6 border-b border-slate-200">
+        <nav class="flex flex-wrap -mb-px" id="tab-nav" role="tablist">
+          <button class="tab-btn active text-lg font-medium p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300"
+            data-tab="story" role="tab" aria-selected="true">1. Story</button>
+          <button class="tab-btn text-lg font-medium p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300"
+            data-tab="vocabulary" role="tab" aria-selected="false">2. Vocabulary</button>
+          <button class="tab-btn text-lg font-medium p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300"
+            data-tab="grammar" role="tab" aria-selected="false">3. Grammar</button>
+          <button class="tab-btn text-lg font-medium p-4 border-b-2 border-transparent rounded-t-lg hover:text-slate-600 hover:border-slate-300"
+            data-tab="practice" role="tab" aria-selected="false">4. Practice</button>
+        </nav>
+      </div>
+
+      <div id="tab-content" class="bg-white p-6 sm:p-8 rounded-lg shadow-xl">
+        <!-- Story -->
+        <section id="story" class="tab-pane active space-y-4" role="tabpanel">
+          <h2 class="text-2xl font-semibold mb-4 text-green-600">Part 1: The News Story: The Community Garden</h2>
+          <div class="prose max-w-none text-lg leading-relaxed">
+            <img src="https://placehold.co/600x300/d9f99d/15803d?text=Community+Garden+Project"
+              alt="A local food festival with many people and food stalls" class="rounded-lg w-full mb-6">
+            <p class="mb-4">Hello and welcome to today's local news!</p>
+            <p>
+              Last weekend, the city's
+              <span class="relative has-tooltip font-bold text-green-600 cursor-pointer">residents
+                <span
+                  class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs bg-slate-800 text-white text-sm rounded py-1 px-2">
+                  people who live in a particular area
+                </span>
+              </span>
+              joined a new
+              <span class="relative has-tooltip font-bold text-green-600 cursor-pointer">project
+                <span
+                  class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs bg-slate-800 text-white text-sm rounded py-1 px-2">
+                  a planned piece of work or activity
+                </span>
+              </span>
+              to clean up the park. They gathered near the old tennis courts to build a
+              <span class="relative has-tooltip font-bold text-green-600 cursor-pointer">community
+                <span
+                  class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs bg-slate-800 text-white text-sm rounded py-1 px-2">
+                  the people living in one particular area or town
+                </span>
+              </span>
+              garden.
+            </p>
+            <p>
+              Volunteers helped to prepare the soil and planted new seeds and flowers. Everyone worked hard all day. At
+              the end, a local artist painted a mural on the fence. The park director announced that the next cleanup is
+              scheduled for next month. Everyone saw the improvement and made new friends.
+            </p>
+          </div>
+        </section>
+
+        <!-- Vocabulary -->
+        <section id="vocabulary" class="tab-pane hidden" role="tabpanel">
+          <h2 class="text-2xl font-semibold mb-4 text-green-600">Part 2: New Words</h2>
+          <p class="mb-6 text-slate-600">Click on a card to see the definition and an example.</p>
+          <div id="flashcards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- Grammar -->
+        <section id="grammar" class="tab-pane hidden space-y-6" role="tabpanel">
+          <h2 class="text-2xl font-semibold mb-4 text-green-600">Part 3: Grammar Focus: Simple Past Tense</h2>
+
+          <div>
+            <h3 class="text-xl font-semibold mb-2">A. Regular Verbs (Add -ed)</h3>
+            <p class="text-slate-600 mb-4">
+              We use the simple past tense to talk about actions that finished in the past. For regular verbs, we add
+              <strong>-ed</strong> to the base form.
+            </p>
+            <div class="space-y-4">
+              <div class="bg-green-100 p-4 rounded-lg">
+                <p class="font-bold text-green-800">Rule 1: Most verbs</p>
+                <p class="text-slate-700">Add <strong>-ed</strong> to the base form. (e.g., <em>work</em> → <em>worked</em>)</p>
+              </div>
+              <div class="bg-yellow-100 p-4 rounded-lg">
+                <p class="font-bold text-yellow-800">Rule 2: Verbs ending in -e</p>
+                <p class="text-slate-700">Add only <strong>-d</strong>. (e.g., <em>join</em> → <em>joined</em>)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-slate-200 mt-6">
+            <h3 class="text-xl font-semibold mb-2">B. Irregular Verbs (Must Memorize)</h3>
+            <p class="text-slate-600 mb-4">Irregular verbs do <strong>not</strong> follow the -ed rule. Their past tense forms are unique. These are very common!</p>
+            <div class="bg-red-100 p-4 rounded-lg">
+              <ul class="list-disc list-inside mt-2 text-red-800 font-medium">
+                <li>see → <strong>saw</strong></li>
+                <li>make → <strong>made</strong></li>
+                <li>go → <strong>went</strong></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Practice -->
+        <section id="practice" class="tab-pane hidden space-y-8" role="tabpanel">
+          <h2 class="text-2xl font-semibold mb-4 text-green-600">Part 4: Practice Time!</h2>
+          <div class="space-y-4" id="quiz-a"></div>
+          <div class="space-y-4" id="quiz-b"></div>
+          <div class="space-y-4" id="quiz-c"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="text-center mt-8 text-sm text-slate-500">
+      <p>Interactive ESL Lesson | Created with HTML, Tailwind CSS, and JavaScript</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const lessonData = {
+        vocabulary: [
+          { word: 'residents', definition: 'people who live in a particular area', example: 'The residents love the park.' },
+          { word: 'project', definition: 'a planned piece of work or activity', example: 'We finished the project on time.' },
+          { word: 'community', definition: 'the people living in one particular area or town', example: 'Our community is very friendly.' },
+          { word: 'planted', definition: 'put a seed or plant in the ground (past tense of plant)', example: 'They planted three trees.' },
+          { word: 'helped', definition: 'did something useful for someone (past tense of help)', example: 'He helped me carry the bag.' },
+          { word: 'announced', definition: 'told people something officially (past tense of announce)', example: 'She announced the news.' },
+          { word: 'scheduled', definition: 'planned an activity for a specific time (past tense of schedule)', example: 'The meeting was scheduled for Friday.' },
+          { word: 'painted', definition: 'covered something with paint (past tense of paint)', example: 'They painted the wall green.' }
+        ]
+      };
+
+      // Flashcards
+      const flashcardsContainer = document.getElementById('flashcards-container');
+      lessonData.vocabulary.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'flashcard bg-white rounded-lg shadow cursor-pointer h-40';
+        card.style.perspective = '1000px';
+        card.innerHTML = `
+          <div class="flashcard-inner relative w-full h-full">
+            <div class="flashcard-front absolute w-full h-full flex items-center justify-center bg-yellow-200 rounded-lg p-4">
+              <h3 class="text-2xl font-bold text-green-800">${item.word}</h3>
+            </div>
+            <div class="flashcard-back absolute w-full h-full bg-lime-100 rounded-lg p-4 flex flex-col justify-center">
+              <p class="font-semibold text-slate-700">${item.definition}</p>
+              <p class="text-sm text-slate-500 mt-2"><em>Example: ${item.example}</em></p>
+            </div>
+          </div>`;
+        card.addEventListener('click', () => card.classList.toggle('flipped'));
+        flashcardsContainer.appendChild(card);
+      });
+
+      // Tabs
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const tabPanes = document.querySelectorAll('.tab-pane');
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const tabId = button.dataset.tab;
+          tabButtons.forEach(btn => {
+            btn.classList.remove('active');
+            btn.setAttribute('aria-selected', 'false');
+          });
+          button.classList.add('active');
+          button.setAttribute('aria-selected', 'true');
+
+          tabPanes.forEach(pane => {
+            if (pane.id === tabId) {
+              pane.classList.remove('hidden');
+              pane.classList.add('active');
+            } else {
+              pane.classList.add('hidden');
+              pane.classList.remove('active');
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
